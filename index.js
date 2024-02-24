@@ -1,27 +1,48 @@
-const inputEl = document.getElementById('input-el')
-const inputBtn = document.getElementById('input-btn')
-const errorMessage = document.getElementById('error-message')
+const form = document.getElementById('form')
+const emailEl = document.getElementById('email-el')
+const validation = document.getElementById('validation')
 const mailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 
-function validateEmail() {
-    if (inputEl.value.match(mailRegex)) {
-        errorMessage.style.color = 'green'
-        errorMessage.textContent = `Well done you're subscribed`
-        inputEl.value = ''
-        return true
+//FUNZIONA
+// form.addEventListener('submit', function(e) {
+//     e.preventDefault()
+
+//     if(!validateEmail(emailEl.value)) {
+//         validation.textContent = 'Please provide a valid email address'
+//         validation.classList.add('error')
+//         validation.classList.remove('success')
+//     } else {
+//         validation.classList.add('success')
+//         validation.classList.remove('error')
+//         validation.textContent = 'Email submitted'
+//     }
+// })
+
+// function validateEmail(email) {
+//     return mailRegex.test(email)
+// }
+
+//UPGRADE
+form.addEventListener('submit', function(e) {
+    e.preventDefault()
+
+    if(!validateEmail(emailEl.value)) {
+        validation.classList.remove('hidden')
+        validation.textContent = 'Please provide a valid email address'
+        validation.classList.add('error')
+        emailEl.classList.add('error-bd')
+        emailEl.classList.remove('success-bd')
+        validation.classList.remove('success')
     } else {
-        inputEl.style.borderColor = 'red';
-        errorMessage.textContent = `Please provide a valid email address`
-        return false
+        validation.classList.remove('hidden')
+        validation.textContent = 'Email submitted'
+        validation.classList.add('success')
+        emailEl.classList.add('success-bd')
+        emailEl.classList.remove('error-bd')
+        validation.classList.remove('error')
     }
-}
-
-
-inputBtn.addEventListener('click', function() {
-    validateEmail()
 })
 
-// inputEl.addEventListener('focus', () => {
-//     inputEl.style.borderColor = 'red';
-//     inputEl.style.color = 'green';
-//   });
+function validateEmail(email) {
+    return mailRegex.test(email)
+}
