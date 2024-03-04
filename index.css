@@ -253,7 +253,7 @@ footer[aria-label=reference] {
 
 .attribution a {
     text-decoration: none;
-    color: var(--primitive-blue);
+    color: var(--primitive-lightRed);
 }
 
 .attribution:focus-within a {
